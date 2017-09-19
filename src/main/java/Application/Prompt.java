@@ -1,3 +1,5 @@
+package Application;
+
 public class Prompt {
     private String prompt = "$";
 
@@ -12,5 +14,14 @@ public class Prompt {
 
     public void setPrompt(String newPrompt) {
         prompt = newPrompt;
+    }
+
+    public void handle(String s, MyState state) {
+        if ("reset".equals(s))
+            reset();
+        else if ("$cwd".equals(s))
+            setPrompt(state.getDirectoryPath().toString());
+        else
+            setPrompt(s);
     }
 }

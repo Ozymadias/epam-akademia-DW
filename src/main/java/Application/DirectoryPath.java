@@ -1,3 +1,5 @@
+package Application;
+
 import java.io.File;
 
 public class DirectoryPath {
@@ -14,9 +16,9 @@ public class DirectoryPath {
         StringBuilder stringBuilder = new StringBuilder();
         for (File file : files) {
             if (file.isFile())
-                stringBuilder.append("FILE ").append(file);
+                stringBuilder.append("FILE ").append(file.getName()).append("\n");
             if (file.isDirectory())
-                stringBuilder.append("DIR  ").append(file);
+                stringBuilder.append("DIR  ").append(file.getName()).append("\n");
         }
         return stringBuilder.toString();
     }

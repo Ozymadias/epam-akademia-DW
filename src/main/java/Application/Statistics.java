@@ -1,4 +1,4 @@
-import java.util.Arrays;
+package Application;
 
 public class Statistics {
     private String[] commands = {"pwd", "cd", "tree", "prompt", "statistics"};
