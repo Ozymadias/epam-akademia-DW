@@ -1,4 +1,3 @@
-import java.io.File;
 import java.util.Scanner;
 
 public class Shell {
@@ -21,7 +20,7 @@ public class Shell {
             if ("dir".equals(input))
                 System.out.println(directoryPath.getContentOf());
             if ("cd".equals(parts[0]) && parts.length == 2)
-                changeDirectoryTo(parts[1]);
+                directoryPath.changeDirectoryTo(parts[1]);
             if ("prompt".equals((parts[0])) && parts.length == 2)
                 prompt(parts[1]);
             if ("tree".equals(input))
@@ -40,13 +39,6 @@ public class Shell {
             prompt.setPrompt(directoryPath.toString());
         else
             prompt.setPrompt(part);
-    }
-
-    private static void changeDirectoryTo(String part) {
-        if ("..".equals(part))
-            directoryPath.changeToParent();
-        else
-            directoryPath.changeToSubdirectory(part);
     }
 
 }

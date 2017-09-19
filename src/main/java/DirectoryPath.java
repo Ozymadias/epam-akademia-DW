@@ -21,12 +21,12 @@ public class DirectoryPath {
         return stringBuilder.toString();
     }
 
-    public void changeToParent() {
+    private void changeToParent() {
         File currentDirectory = new File(currentDirectoryPath);
         currentDirectoryPath = currentDirectory.getParent();
     }
 
-    public void changeToSubdirectory(String subdirectoryName) {
+    private void changeToSubdirectory(String subdirectoryName) {
         File currentDirectory = new File(currentDirectoryPath);
         File[] files = currentDirectory.listFiles();
         for (File file : files)
@@ -54,5 +54,12 @@ public class DirectoryPath {
             if (f.isDirectory())
                 stringBuilder.append(getTree(f, depth + "-"));
         return stringBuilder.toString();
+    }
+
+    public void changeDirectoryTo(String part) {
+        if ("..".equals(part))
+            changeToParent();
+        else
+            changeToSubdirectory(part);
     }
 }
