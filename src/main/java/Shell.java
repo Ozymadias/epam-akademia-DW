@@ -5,6 +5,7 @@ public class Shell {
 
     private static String currentDirectoryPath = System.getProperty("user.dir");
     private static Prompt prompt = new Prompt();
+    private static DirectoryPath directoryPath = new DirectoryPath();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -13,14 +14,16 @@ public class Shell {
             System.out.print(prompt + ">");
             input = scanner.nextLine();
             if ("pwd".equals(input))
-                System.out.println(currentDirectoryPath);
+                System.out.println(directoryPath);
             if ("dir".equals(input))
-                displayContentOf();
+                System.out.println(directoryPath.getContentOf());
             String[] parts = input.split(" ");
             if ("cd".equals(parts[0]) && parts.length == 2)
                 changeDirectoryTo(parts[1]);
             if ("prompt".equals((parts[0])) && parts.length == 2)
                 prompt(parts[1]);
+            if("tree".equals(input))
+                System.out.println(directoryPath.getTree());//(new File(currentDirectoryPath));
         }
         System.out.println("Bye");
     }
@@ -29,40 +32,16 @@ public class Shell {
         if("reset".equals(part))
             prompt.reset();
         else if("$cwd".equals(part))
-            prompt.setPrompt(currentDirectoryPath);
+            prompt.setPrompt(directoryPath.toString());
         else
             prompt.setPrompt(part);
     }
 
     private static void changeDirectoryTo(String part) {
         if ("..".equals(part))
-            changeToParent();
+            directoryPath.changeToParent();
         else
-            changeToChild(part);
+            directoryPath.changeToSubdirectory(part);
     }
 
-    private static void changeToChild(String part) {
-        File currentDirectory = new File(currentDirectoryPath);
-        File[] files = currentDirectory.listFiles();
-        for (File file : files)
-            if (file.getName().equals(part))
-                currentDirectoryPath = file.getPath();
-        //error Handling
-    }
-
-    private static void changeToParent() {
-        File currentDirectory = new File(currentDirectoryPath);
-        currentDirectoryPath = currentDirectory.getParent();
-    }
-
-    private static void displayContentOf() {
-        File currentDirectory = new File(currentDirectoryPath);
-        File[] files = currentDirectory.listFiles();
-        for (File file : files) {
-            if (file.isFile())
-                System.out.println("FILE " + file);
-            if (file.isDirectory())
-                System.out.println("DIR  " + file);
-        }
-    }
 }
