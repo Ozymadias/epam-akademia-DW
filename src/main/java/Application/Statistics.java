@@ -1,16 +1,15 @@
 package Application;
 
 public class Statistics {
-    private String[] commands = {"pwd", "cd", "tree", "prompt", "statistics"};
+    private String[] commands = {"cd", "pwd", "tree", "prompt", "statistics"};
     private int numberOfCommands = commands.length;
-    private int[] numberOfSuccessfulInvocations = new int[numberOfCommands];
-    private int[] numberOfUnsuccessfulInvocations = new int[numberOfCommands];
+    private int[][] numberOfInvocations = new int[numberOfCommands][2];
 
 
     public Statistics() {
         for (int i = 0; i < numberOfCommands; i++) {
-            numberOfSuccessfulInvocations[i] = 0;
-            numberOfUnsuccessfulInvocations[i] = 0;
+            numberOfInvocations[i][0] = 0;
+            numberOfInvocations[i][1] = 0;
         }
     }
 
@@ -21,16 +20,24 @@ public class Statistics {
             stringBuilder
                     .append(commands[i])
                     .append(":")
-                    .append(numberOfSuccessfulInvocations[i])
+                    .append(numberOfInvocations[i][0])
                     .append(":")
-                    .append(numberOfUnsuccessfulInvocations[i])
+                    .append(numberOfInvocations[i][1])
                     .append("\n");
         return stringBuilder.toString();
     }
 
-    public void count(String commandName) {
-        for(int i = 0; i < numberOfCommands; i++)
-            if(commands[i].equals(commandName))
-                numberOfSuccessfulInvocations[i]++;
+    public void count(String commandName, int successOrNot) {
+        for (int i = 0; i < numberOfCommands; i++)
+            if (commands[i].equals(commandName))
+                numberOfInvocations[i][successOrNot]++;
+    }
+
+    public void countSuccess(String part) {
+        count(part, 0);
+    }
+
+    public void countFailure(String part) {
+        count(part, 1);
     }
 }

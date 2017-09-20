@@ -1,5 +1,6 @@
 package Commands;
 
+import Application.IllegalCommandUsageException;
 import Application.MyState;
 
 public class Prompt implements Command {
@@ -7,7 +8,9 @@ public class Prompt implements Command {
     private int tailLength;
 
     @Override
-    public void execute(MyState state) {
+    public void execute(MyState state) throws IllegalCommandUsageException {
+        if (tailLength != 1)
+            throw new IllegalCommandUsageException("Prompt command have to have argument");
         state.handlePrompt(prompt);
     }
 

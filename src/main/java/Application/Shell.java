@@ -15,9 +15,17 @@ public class Shell {
             System.out.print(state.getPrompt() + ">");
             input = scanner.nextLine();
             String[] parts = input.split(" ");
-            Command command = commandFactory.getCommand(input);
-            command.execute(state);
-            state.getStatistics().count(parts[0]);
+            try {
+                Command command = commandFactory.getCommand(input);
+                command.execute(state);
+                state.getStatistics().countSuccess(parts[0]);
+            } catch (IllegalCommandUsageException e) {
+                System.out.println(e.getMessage());
+                state.getStatistics().countFailure(parts[0]);
+            }
+            catch (IllegalCommandException e){
+                System.out.println(parts[0] + " : unknown command");
+            }
         }
         System.out.println("Bye");
     }

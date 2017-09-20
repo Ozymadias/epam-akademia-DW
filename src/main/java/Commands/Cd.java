@@ -1,5 +1,6 @@
 package Commands;
 
+import Application.IllegalCommandUsageException;
 import Application.MyState;
 
 public class Cd implements Command {
@@ -7,7 +8,9 @@ public class Cd implements Command {
     private int tailLength;
 
     @Override
-    public void execute(MyState state) {
+    public void execute(MyState state) throws IllegalCommandUsageException {
+        if (tailLength != 1)
+            throw new IllegalCommandUsageException("Improper directory passed to cd command!");
         state.getDirectoryPath().changeDirectoryTo(directory);
     }
 
