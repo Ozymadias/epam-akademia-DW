@@ -12,7 +12,7 @@ public class Shell {
         Scanner scanner = new Scanner(System.in);
         String input = "";
         while (!"exit".equals(input)) {
-            System.out.print(state.getPromptState().toString() + ">");
+            System.out.print(state.getPrompt() + ">");
             input = scanner.nextLine();
             String[] parts = input.split(" ");
             Command command = commandFactory.getCommand(input);

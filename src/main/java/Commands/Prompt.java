@@ -8,7 +8,7 @@ public class Prompt implements Command {
 
     @Override
     public void execute(MyState state) {
-        state.getPromptState().handle(prompt, state);
+        state.handlePrompt(prompt);
     }
 
     @Override
