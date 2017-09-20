@@ -3,13 +3,17 @@ package Commands;
 import Application.MyState;
 
 public class Prompt implements Command {
-    private final String prompt;
+    private String prompt;
+    private int tailLength;
 
-    public Prompt(String prompt) {
-        this.prompt = prompt;
+    @Override
+    public void execute(MyState state) {
+        state.getPromptState().handle(prompt, state);
     }
 
-    public void execute(MyState state) {
-        state.getPrompt().handle(prompt, state);
+    @Override
+    public void setTail(String part, int length) {
+        this.prompt = part;
+        this.tailLength = length;
     }
 }

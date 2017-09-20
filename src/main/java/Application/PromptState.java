@@ -1,6 +1,6 @@
 package Application;
 
-public class Prompt {
+public class PromptState {
     private String prompt = "$";
 
     @Override

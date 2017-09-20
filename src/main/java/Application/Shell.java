@@ -5,7 +5,6 @@ import Commands.Command;
 import java.util.Scanner;
 
 public class Shell {
-    private static CommandsHandler commandsHandler = new CommandsHandler();
     private static CommandFactory commandFactory = new CommandFactory();
     private static MyState state = new MyState();
 
@@ -13,10 +12,9 @@ public class Shell {
         Scanner scanner = new Scanner(System.in);
         String input = "";
         while (!"exit".equals(input)) {
-            System.out.print(state.getPrompt().toString() + ">");
+            System.out.print(state.getPromptState().toString() + ">");
             input = scanner.nextLine();
             String[] parts = input.split(" ");
-            commandsHandler.handle(input);
             Command command = commandFactory.getCommand(input);
             command.execute(state);
             state.getStatistics().count(parts[0]);

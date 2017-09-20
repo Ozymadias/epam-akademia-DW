@@ -4,21 +4,27 @@ import Commands.*;
 import Commands.Prompt;
 import Commands.Statistics;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CommandFactory {
+    Map<String, Command> map = new HashMap<>();
+
+    public CommandFactory() {
+        map.put("pwd", new Pwd());
+        map.put("dir", new Dir());
+        map.put("tree", new Tree());
+        map.put("statistics", new Statistics());
+        map.put("cd", new Cd());
+        map.put("prompt", new Prompt());
+    }
+
     public Command getCommand(String input) {
         String[] parts = input.split(" ");
-        if ("pwd".equals(input))
-            return new Pwd();
-        if ("dir".equals(input))
-            return new Dir();
-        if ("cd".equals(parts[0]) && parts.length == 2)
-            return new Cd(parts[1]);
-        if ("prompt".equals((parts[0])) && parts.length == 2)
-            return new Prompt(parts[1]);
-        if ("tree".equals(input))
-            return new Tree();
-        if ("statistics".equals(input))
-            return new Statistics();
-        return new InvalidCommand();
+        if (!map.containsKey(parts[0]))
+            return new InvalidCommand();
+        Command command = map.get(parts[0]);
+        command.setTail(parts.length > 1 ? parts[1] : "", parts.length);
+        return command;
     }
 }

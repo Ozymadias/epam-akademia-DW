@@ -1,7 +1,7 @@
 package Application;
 
 public class MyState {
-    private static Prompt prompt = new Prompt();
+    private static PromptState promptState = new PromptState();
     private static DirectoryPath directoryPath = new DirectoryPath();
     private static Statistics statistics = new Statistics();
 
@@ -9,8 +9,8 @@ public class MyState {
         return statistics;
     }
 
-    public static Prompt getPrompt() {
-        return prompt;
+    public static PromptState getPromptState() {
+        return promptState;
     }
 
     public static DirectoryPath getDirectoryPath() {

@@ -5,4 +5,6 @@ import Application.MyState;
 //TODO: apply polymorphism
 public interface Command {
     void execute(MyState state);
+
+    void setTail(String part, int length);
 }
