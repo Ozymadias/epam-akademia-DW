@@ -61,9 +61,10 @@ public class DirectoryPath {
     }
 
     private void changeToSubdirectory(String subdirectoryName) {
-        for (File file : currentDirectoryPath.listFiles())
-            if (file.getName().equals(subdirectoryName))
-                currentDirectoryPath = file;
+        Arrays.stream(currentDirectoryPath.listFiles())
+                .filter(File::isDirectory)
+                .filter(file -> file.getName().equals(subdirectoryName))
+                .findAny().ifPresent(file -> currentDirectoryPath = file);
         //error Handling
     }
 }
