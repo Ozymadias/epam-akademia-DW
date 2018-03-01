@@ -1,11 +1,15 @@
-package application;
+package directory;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.Optional;
+
+import static directory.FileType.*;
 
 public class DirectoryPath {
     private File currentDirectoryPath;
 
-    DirectoryPath() {
+    public DirectoryPath() {
         currentDirectoryPath = new File(System.getProperty("user.dir"));
     }
 
@@ -15,14 +19,16 @@ public class DirectoryPath {
     }
 
     public String getContentOf() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (File file : currentDirectoryPath.listFiles()) {
-            if (file.isFile())
-                stringBuilder.append("FILE ").append(file.getName()).append("\n");
-            if (file.isDirectory())
-                stringBuilder.append("DIR  ").append(file.getName()).append("\n");
-        }
-        return stringBuilder.toString();
+        Optional<String> dirs = getString(DIR);
+        return getString(FILE).map(file -> file + dirs.map(dir -> "\n" + dir).orElse(""))
+                .orElse(dirs.orElse(""));
+    }
+
+    private Optional<String> getString(FileType prefix) {
+        return Arrays.stream(currentDirectoryPath.listFiles())
+                .filter(prefix.getPredicate())
+                .map(file -> prefix + " " + file.getName())
+                .reduce((a, b) -> a + "\n" + b);
     }
 
     public String getTree() {

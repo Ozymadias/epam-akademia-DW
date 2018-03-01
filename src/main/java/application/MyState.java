@@ -1,5 +1,6 @@
 package application;
 
+import directory.DirectoryPath;
 import statistics.Statistics;
 
 public class MyState {
