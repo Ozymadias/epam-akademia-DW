@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Statistics {
-    private String[] commands = {"cd", "pwd", "tree", "prompt", "statistics"};
+    private String[] commands = {"cd", "dir", "pwd", "tree", "prompt", "statistics"};
     private Map<String, Stat> commandStats;
 
     public Statistics() {
