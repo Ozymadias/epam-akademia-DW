@@ -20,7 +20,8 @@ public class DirectoryPath {
 
     public String getContentOf() {
         Optional<String> dirs = getString(DIR);
-        return getString(FILE).map(file -> file + dirs.map(dir -> "\n" + dir).orElse(""))
+        return getString(FILE)
+                .map(file -> file + dirs.map(dir -> "\n" + dir).orElse(""))
                 .orElse(dirs.orElse(""));
     }
 
@@ -32,21 +33,16 @@ public class DirectoryPath {
     }
 
     public String getTree() {
-        StringBuilder stringBuilder = new StringBuilder(currentDirectoryPath.getName());
-        stringBuilder.append("\n");
-        for (File file : currentDirectoryPath.listFiles())
-            if (file.isDirectory())
-                stringBuilder.append(getTree(file, "-"));
-        return stringBuilder.toString();
+        return getTree(currentDirectoryPath, "");
     }
 
     private String getTree(File file, String depth) {
-        StringBuilder stringBuilder = new StringBuilder(depth);
-        stringBuilder.append(file.getName()).append("\n");
-        for (File f : file.listFiles())
-            if (f.isDirectory())
-                stringBuilder.append(getTree(f, depth + "-"));
-        return stringBuilder.toString();
+        String tail = Arrays.stream(file.listFiles())
+                .filter(File::isDirectory)
+                .map(dir -> getTree(dir, depth + "-"))
+                .reduce((a, b) -> a + b)
+                .orElse("");
+        return depth + file.getName() + "\n" + tail;
     }
 
     public void changeDirectoryTo(String part) {
@@ -65,6 +61,5 @@ public class DirectoryPath {
                 .filter(File::isDirectory)
                 .filter(file -> file.getName().equals(subdirectoryName))
                 .findAny().ifPresent(file -> currentDirectoryPath = file);
-        //error Handling
     }
 }
