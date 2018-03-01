@@ -1,5 +1,7 @@
 package application;
 
+import statistics.Statistics;
+
 public class MyState {
     private static String prompt = "$";
     private static DirectoryPath directoryPath = new DirectoryPath();
