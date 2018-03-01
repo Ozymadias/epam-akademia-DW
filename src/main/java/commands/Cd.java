@@ -1,6 +1,5 @@
 package commands;
 
-import application.IllegalCommandUsageException;
 import application.MyState;
 
 class Cd implements Command {

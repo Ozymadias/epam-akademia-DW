@@ -2,6 +2,8 @@ package application;
 
 import commands.Command;
 import commands.CommandFactory;
+import commands.IllegalCommandException;
+import commands.IllegalCommandUsageException;
 
 import java.util.Scanner;
 

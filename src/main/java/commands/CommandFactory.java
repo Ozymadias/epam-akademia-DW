@@ -1,7 +1,5 @@
 package commands;
 
-import application.IllegalCommandException;
-
 import java.util.HashMap;
 import java.util.Map;
 

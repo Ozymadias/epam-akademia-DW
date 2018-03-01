@@ -1,7 +1,5 @@
 package commands;
 
-import application.IllegalCommandUsageException;
-
 public interface Command {
     void execute() throws IllegalCommandUsageException;
 
