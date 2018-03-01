@@ -1,8 +1,6 @@
-package application;
+package commands;
 
-import commands.*;
-import commands.Prompt;
-import commands.StatisticsCommand;
+import application.IllegalCommandException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +17,7 @@ public class CommandFactory {
         map.put("statistics", new StatisticsCommand());
     }
 
-    public Command getCommand(String input) throws IllegalCommandException{
+    public Command getCommand(String input) throws IllegalCommandException {
         String[] parts = input.split(" ");
         if (!map.containsKey(parts[0]))
             throw new IllegalCommandException();
