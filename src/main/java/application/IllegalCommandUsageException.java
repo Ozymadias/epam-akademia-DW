@@ -1,4 +1,4 @@
-package Application;
+package application;
 
 public class IllegalCommandUsageException extends Exception {
     public IllegalCommandUsageException(String message) {

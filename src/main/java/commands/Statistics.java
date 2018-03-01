@@ -1,22 +1,20 @@
-package Commands;
+package commands;
 
-import Application.IllegalCommandUsageException;
-import Application.MyState;
+import application.IllegalCommandUsageException;
+import application.MyState;
 
 public class Statistics implements Command {
-    private String headOfTail;
     private int tailLength;
 
     @Override
-    public void execute(MyState state) throws IllegalCommandUsageException {
+    public void execute() throws IllegalCommandUsageException {
         if (tailLength != 0)
             throw new IllegalCommandUsageException("Statistics command must not have argument");
-        System.out.println(state.getStatistics());
+        System.out.println(MyState.getStatistics());
     }
 
     @Override
     public void setTail(String part, int length) {
-        this.headOfTail = part;
         this.tailLength = length;
     }
 }

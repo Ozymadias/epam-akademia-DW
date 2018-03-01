@@ -1,4 +1,4 @@
-package Application;
+package application;
 
 public class Statistics {
     private String[] commands = {"cd", "pwd", "tree", "prompt", "statistics"};

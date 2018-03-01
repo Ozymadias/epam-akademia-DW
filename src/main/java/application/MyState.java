@@ -1,4 +1,4 @@
-package Application;
+package application;
 
 public class MyState {
     private static String prompt = "$";
@@ -11,7 +11,7 @@ public class MyState {
         return statistics;
     }
 
-    public static String getPrompt() {
+    static String getPrompt() {
         if (!isCwd)
             return prompt;
         else
@@ -22,11 +22,11 @@ public class MyState {
         return directoryPath;
     }
 
-    public void setPrompt(String prompt) {
-        this.prompt = prompt;
+    private static void setPrompt(String newPrompt) {
+        prompt = newPrompt;
     }
 
-    public void handlePrompt(String prompt) {
+    public static void handlePrompt(String prompt) {
         if ("$cwd".equals(prompt))
             isCwd = true;
         else {

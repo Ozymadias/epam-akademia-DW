@@ -1,17 +1,17 @@
-package Commands;
+package commands;
 
-import Application.IllegalCommandUsageException;
-import Application.MyState;
+import application.IllegalCommandUsageException;
+import application.MyState;
 
 public class Prompt implements Command {
     private String prompt;
     private int tailLength;
 
     @Override
-    public void execute(MyState state) throws IllegalCommandUsageException {
+    public void execute() throws IllegalCommandUsageException {
         if (tailLength != 1)
             throw new IllegalCommandUsageException("Prompt command have to have argument");
-        state.handlePrompt(prompt);
+        MyState.handlePrompt(prompt);
     }
 
     @Override

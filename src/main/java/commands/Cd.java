@@ -1,17 +1,17 @@
-package Commands;
+package commands;
 
-import Application.IllegalCommandUsageException;
-import Application.MyState;
+import application.IllegalCommandUsageException;
+import application.MyState;
 
 public class Cd implements Command {
     private String directory;
     private int tailLength;
 
     @Override
-    public void execute(MyState state) throws IllegalCommandUsageException {
+    public void execute() throws IllegalCommandUsageException {
         if (tailLength != 1)
             throw new IllegalCommandUsageException("Improper directory passed to cd command!");
-        state.getDirectoryPath().changeDirectoryTo(directory);
+        MyState.getDirectoryPath().changeDirectoryTo(directory);
     }
 
     @Override

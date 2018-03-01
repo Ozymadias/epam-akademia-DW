@@ -1,8 +1,8 @@
-package Application;
+package application;
 
-import Commands.*;
-import Commands.Prompt;
-import Commands.Statistics;
+import commands.*;
+import commands.Prompt;
+import commands.Statistics;
 
 import java.util.HashMap;
 import java.util.Map;
