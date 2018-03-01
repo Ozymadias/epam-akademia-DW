@@ -2,7 +2,7 @@ package application;
 
 import commands.*;
 import commands.Prompt;
-import commands.Statistics;
+import commands.StatisticsCommand;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +16,7 @@ public class CommandFactory {
         map.put("pwd", new Pwd());
         map.put("tree", new Tree());
         map.put("prompt", new Prompt());
-        map.put("statistics", new Statistics());
+        map.put("statistics", new StatisticsCommand());
     }
 
     public Command getCommand(String input) throws IllegalCommandException{
