@@ -9,7 +9,7 @@ class Cd implements Command {
     @Override
     public void execute() throws IllegalCommandUsageException {
         if (tailLength != 1)
-            throw new IllegalCommandUsageException("Improper directory passed to cd command!");
+            throw new IllegalCommandUsageException("Cd command needs argument");
         MyState.getDirectoryPath().changeDirectoryTo(directory);
     }
 

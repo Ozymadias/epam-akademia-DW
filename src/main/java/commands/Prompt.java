@@ -9,7 +9,7 @@ class Prompt implements Command {
     @Override
     public void execute() throws IllegalCommandUsageException {
         if (tailLength != 1)
-            throw new IllegalCommandUsageException("Prompt command have to have argument");
+            throw new IllegalCommandUsageException("Prompt command needs argument");
         MyState.handlePrompt(promptSign);
     }
 
