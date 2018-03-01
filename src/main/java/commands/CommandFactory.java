@@ -20,7 +20,7 @@ public class CommandFactory {
         if (!map.containsKey(parts[0]))
             throw new IllegalCommandException(parts[0]);
         Command command = map.get(parts[0]);
-        command.setTail(parts.length > 1 ? parts[1] : "", parts.length - 1);
+        command.setTail(parts.length > 1 ? parts[1] : "", parts.length - 1);//TODO get rid of it
         return command;
     }
 }

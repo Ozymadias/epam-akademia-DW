@@ -14,7 +14,7 @@ public class MyState {
     }
 
     static String getPrompt() {
-        return isCwd ? directoryPath.toString() : prompt;
+        return (isCwd ? directoryPath.toString() : prompt) + ">";
     }
 
     public static DirectoryPath getDirectoryPath() {
