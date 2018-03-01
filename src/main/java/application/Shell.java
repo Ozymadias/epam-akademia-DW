@@ -26,7 +26,7 @@ public class Shell {
                 MyState.getStatistics().countFailure(parts[0]);
             }
             catch (IllegalCommandException e){
-                System.out.println(parts[0] + " : unknown command");
+                System.out.println(e.getMessage());
             }
         }
         System.out.println("Bye");

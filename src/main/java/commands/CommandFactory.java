@@ -18,7 +18,7 @@ public class CommandFactory {
     public Command getCommand(String input) throws IllegalCommandException {
         String[] parts = input.split(" ");
         if (!map.containsKey(parts[0]))
-            throw new IllegalCommandException();
+            throw new IllegalCommandException(parts[0]);
         Command command = map.get(parts[0]);
         command.setTail(parts.length > 1 ? parts[1] : "", parts.length - 1);
         return command;
