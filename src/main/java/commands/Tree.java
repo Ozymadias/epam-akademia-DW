@@ -3,7 +3,7 @@ package commands;
 import application.IllegalCommandUsageException;
 import application.MyState;
 
-public class Tree implements Command {
+class Tree implements Command {
     private int tailLength;
 
     @Override

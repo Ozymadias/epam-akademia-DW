@@ -3,7 +3,7 @@ package commands;
 import application.IllegalCommandUsageException;
 import application.MyState;
 
-public class Prompt implements Command {
+class Prompt implements Command {
     private String promptSign;
     private int tailLength;
 

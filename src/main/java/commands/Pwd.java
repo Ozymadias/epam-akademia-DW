@@ -3,7 +3,7 @@ package commands;
 import application.IllegalCommandUsageException;
 import application.MyState;
 
-public class Pwd implements Command {
+class Pwd implements Command {
     private int tailLength;
 
     @Override

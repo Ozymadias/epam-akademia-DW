@@ -3,7 +3,7 @@ package commands;
 import application.IllegalCommandUsageException;
 import application.MyState;
 
-public class Cd implements Command {
+class Cd implements Command {
     private String directory;
     private int tailLength;
 
