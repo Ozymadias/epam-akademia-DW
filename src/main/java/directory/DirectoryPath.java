@@ -1,10 +1,13 @@
 package directory;
 
+import commands.IllegalCommandUsageException;
+
 import java.io.File;
 import java.util.Arrays;
 import java.util.Optional;
 
-import static directory.FileType.*;
+import static directory.FileType.DIR;
+import static directory.FileType.FILE;
 
 public class DirectoryPath {
     private File currentDirectoryPath;
@@ -45,7 +48,7 @@ public class DirectoryPath {
         return depth + file.getName() + "\n" + tail;
     }
 
-    public void changeDirectoryTo(String part) {
+    public void changeDirectoryTo(String part) throws IllegalCommandUsageException {
         if ("..".equals(part))
             changeToParent();
         else
@@ -56,10 +59,12 @@ public class DirectoryPath {
         currentDirectoryPath = currentDirectoryPath.getParentFile();
     }
 
-    private void changeToSubdirectory(String subdirectoryName) {
-        Arrays.stream(currentDirectoryPath.listFiles())
+    private void changeToSubdirectory(String subdirectoryName) throws IllegalCommandUsageException {
+        currentDirectoryPath = Arrays.stream(currentDirectoryPath.listFiles())
                 .filter(File::isDirectory)
                 .filter(file -> file.getName().equals(subdirectoryName))
-                .findAny().ifPresent(file -> currentDirectoryPath = file);
+                .findAny()
+                .orElseThrow(() -> new IllegalCommandUsageException("No such subdirectory"));
     }
+
 }

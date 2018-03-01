@@ -1,7 +1,7 @@
 package commands;
 
 public class IllegalCommandUsageException extends Exception {
-    IllegalCommandUsageException(String message) {
+    public IllegalCommandUsageException(String message) {
         super(message);
     }
 }
