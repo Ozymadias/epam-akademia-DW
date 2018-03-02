@@ -9,7 +9,7 @@ class Dir implements Command {
     public void execute() throws IllegalCommandUsageException {
         if (tailLength != 0)
             throw new IllegalCommandUsageException("Dir command must not have argument");
-        System.out.println(MyState.getDirectoryPath().getContentOf());
+        System.out.print(MyState.getDirectoryPath().getContentOf());
     }
 
     @Override

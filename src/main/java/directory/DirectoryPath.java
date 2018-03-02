@@ -4,7 +4,7 @@ import commands.IllegalCommandUsageException;
 
 import java.io.File;
 import java.util.Arrays;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static directory.FileType.DIR;
 import static directory.FileType.FILE;
@@ -22,17 +22,14 @@ public class DirectoryPath {
     }
 
     public String getContentOf() {
-        Optional<String> dirs = getString(DIR);
-        return getString(FILE)
-                .map(file -> file + dirs.map(dir -> "\n" + dir).orElse(""))
-                .orElse(dirs.orElse(""));
+        return getString(DIR) + getString(FILE);
     }
 
-    private Optional<String> getString(FileType prefix) {
+    private String getString(FileType prefix) {
         return Arrays.stream(currentDirectoryPath.listFiles())
                 .filter(prefix.getPredicate())
-                .map(file -> prefix + " " + file.getName())
-                .reduce((a, b) -> a + "\n" + b);
+                .map(file -> prefix + " " + file.getName() + "\n")
+                .collect(Collectors.joining());
     }
 
     public String getTree() {
@@ -43,8 +40,7 @@ public class DirectoryPath {
         String tail = Arrays.stream(file.listFiles())
                 .filter(File::isDirectory)
                 .map(dir -> getTree(dir, depth + "-"))
-                .reduce((a, b) -> a + b)
-                .orElse("");
+                .collect(Collectors.joining());
         return depth + file.getName() + "\n" + tail;
     }
 
